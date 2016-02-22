@@ -25,7 +25,7 @@ if __name__ == '__main__':
         sys.stderr.write('Exception when reading long description: %s\n' %(str(e),))
         long_description = summary
 
-    setup(name='NamedLock',
+    setup(name='NamedAtomicLock',
             version='1.0.0',
             packages=['NamedAtomicLock'],
             author='Tim Savannah',
