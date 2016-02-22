@@ -1,4 +1,5 @@
-# NamedAtomicLock
+NamedAtomicLock
+===============
 
 Python module for an atomic named-lock which is local to the machine.
 
@@ -26,9 +27,13 @@ A basic usage example
 
 	myLock = NamedAtomicLock('myLock')
 
+
 	if myLock.acquire(timeout=15):
+
 		doWork()
+
 		myLock.release()
-	
+
+
 
 
