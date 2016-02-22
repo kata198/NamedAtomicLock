@@ -4,6 +4,9 @@
     http://www.gnu.org/licenses/lgpl-3.0.en.html
 
     See https://github.com/kata198/NamedAtomicLock for latest version
+
+    NamedAtomicLock - A Named atomic lock local to the machine
+
 '''
 import os
 import tempfile
