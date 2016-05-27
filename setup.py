@@ -26,7 +26,7 @@ if __name__ == '__main__':
         long_description = summary
 
     setup(name='NamedAtomicLock',
-            version='1.0.0',
+            version='1.1.0',
             packages=['NamedAtomicLock'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',

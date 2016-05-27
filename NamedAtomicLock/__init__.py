@@ -16,11 +16,16 @@ import time
 
 __all__ = ('NamedAtomicLock',)
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
-__version_tuple__ = (1, 0, 0)
+__version_tuple__ = (1, 1, 0)
 
 DEFAULT_POLL_TIME = .1
+
+try:
+    FileNotFoundError
+except:
+    FileNotFoundError = OSError
 
 class NamedAtomicLock(object):
 
@@ -146,17 +151,41 @@ class NamedAtomicLock(object):
             return False
 
     @property
+    def isHeld(self):
+        '''
+            isHeld - True if anyone holds the lock, otherwise False.
+
+            @return bool - If lock is held by anyone
+        '''
+        if not os.path.exists(self.lockPath):
+            return False
+        
+        try:
+            mtime = os.stat(self.lockPath).st_mtime
+        except FileNotFoundError as e:
+            return False
+        
+        if mtime < time.time() - self.maxLockAge:
+            # Expired
+            return False
+
+        return True
+
+    @property
     def hasLock(self):
         '''
             hasLock - Property, returns True if we have the lock, or False if we do not.
 
             @return <bool> - True/False if we have the lock or not.
         '''
+        # If we don't hold it currently, return False
         if self.held is False:
             return False
-        if os.path.exists(self.lockPath) and os.stat(self.lockPath).st_mtime < time.time() - self.maxLockAge:
-            # The lock expired, we should note we no longer have it and return False. Next acquiring thread will take it over.
+        
+        # Otherwise if we think we hold it, and it is held, it must be held.
+        if not self.isHeld:
             self.held = False
             return False
+
         return True
 

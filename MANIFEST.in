@@ -5,3 +5,4 @@ include README.rst
 include LICENSE
 include setup.py
 include MANIFEST.in
+include ChangeLog

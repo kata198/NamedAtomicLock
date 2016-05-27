@@ -1,0 +1,4 @@
+1.1.0 - May 27 2016
+- Add "isHeld" property to test if anyone holds the lock
+- Don't raise FileNotFoundError in the rare case that the lock is removed
+between call to os.path.exists  and os.stat
