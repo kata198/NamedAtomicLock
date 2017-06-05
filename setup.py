@@ -16,7 +16,7 @@ if __name__ == '__main__':
     if dirName and os.getcwd() != dirName:
         os.chdir(dirName)
 
-    summary = 'Python module for an atomic named lock which is local to the machine.'
+    summary = 'Python module for an atomic named interprocess lock which is local to the machine.'
 
     try:
         with open('README.rst', 'rt') as f:
@@ -26,7 +26,7 @@ if __name__ == '__main__':
         long_description = summary
 
     setup(name='NamedAtomicLock',
-            version='1.1.0',
+            version='1.1.1',
             packages=['NamedAtomicLock'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
@@ -47,6 +47,8 @@ if __name__ == '__main__':
                           'Programming Language :: Python :: 3',
                           'Programming Language :: Python :: 3.3',
                           'Programming Language :: Python :: 3.4',
+                          'Programming Language :: Python :: 3.5',
+                          'Programming Language :: Python :: 3.6',
                           'Topic :: Software Development :: Libraries :: Python Modules',
             ]
     )

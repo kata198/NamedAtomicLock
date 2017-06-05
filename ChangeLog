@@ -1,3 +1,7 @@
+1.1.1 - Jun 5 2017
+- Update to note compatible with python 3.5 and python 3.6
+
+
 1.1.0 - May 27 2016
 - Add "isHeld" property to test if anyone holds the lock
 - Don't raise FileNotFoundError in the rare case that the lock is removed
