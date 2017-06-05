@@ -1,7 +1,9 @@
 NamedAtomicLock
 ===============
 
-Python module for an atomic named-lock which is local to the machine.
+Python module for an atomic named interprocess lock which is local to the machine.
+
+This means that this lock works across process boundries, so you can use it to lock objects that multiple processes would use.
 
 
 NamedAtomicLock works by taking advantage of the fact that POSIX defines mkdir to be an atomic operation. So a directory is used as the name.
