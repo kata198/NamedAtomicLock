@@ -1,5 +1,5 @@
 '''
-    Copyright (c) 2016 Timothy Savannah All Rights Reserved under terms of LGPLv3.
+    Copyright (c) 2016, 2017 Timothy Savannah All Rights Reserved under terms of LGPLv3.
     You should have received a copy of this as LICENSE with the source distribution, or it is always available at
     http://www.gnu.org/licenses/lgpl-3.0.en.html
 
@@ -16,9 +16,9 @@ import time
 
 __all__ = ('NamedAtomicLock',)
 
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
-__version_tuple__ = (1, 1, 1)
+__version_tuple__ = (1, 1, 2)
 
 DEFAULT_POLL_TIME = .1
 

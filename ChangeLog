@@ -1,3 +1,6 @@
+1.1.2 - Oct 5 2017
+- Fix isHeld method throwing exception when maxLockAge=None (the default)
+
 1.1.1 - Jun 5 2017
 - Update to note compatible with python 3.5 and python 3.6
 
