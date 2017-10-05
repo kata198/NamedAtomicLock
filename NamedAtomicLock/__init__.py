@@ -165,7 +165,7 @@ class NamedAtomicLock(object):
         except FileNotFoundError as e:
             return False
         
-        if mtime < time.time() - self.maxLockAge:
+        if self.maxLockAge and ( mtime < time.time() - self.maxLockAge ):
             # Expired
             return False
 
