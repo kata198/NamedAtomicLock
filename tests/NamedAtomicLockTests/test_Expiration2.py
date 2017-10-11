@@ -119,6 +119,7 @@ class TestExpiration2(object):
         assert didAcquire , 'Expected to acquire with a timeout longer than the expiration (i.e. the old lock expires during our window to acquire)'
 
         # NOTE - THE FOLLOWING LINE FAILS ON 1.1.2!!
+        sys.stderr.write('NOTE: As of 1.1.2, BUG in that the following assertion will fail\n')
         assert lockObj.hasLock is False , 'Expected hasLock to change to False after maxLockAge passes and other obj acquires'
         assert lockObj.isHeld is True , 'Expected isHeld on orig obj to be True after rolling-acquire'
 
