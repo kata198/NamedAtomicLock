@@ -1,3 +1,6 @@
+1.2.0 - ??? ? ????
+- Prefix the basename of the lockPath with ".NL__" -- to isolate NamedAtomicLock objects from other objects on the system (potentially)
+
 1.1.2 - Oct 5 2017
 - Fix isHeld method throwing exception when maxLockAge=None (the default)
 
