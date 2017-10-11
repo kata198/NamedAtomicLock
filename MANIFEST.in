@@ -6,3 +6,5 @@ include LICENSE
 include setup.py
 include MANIFEST.in
 include ChangeLog
+recursive-include tests runTests.py
+recursive-include tests/NamedAtomicLockTests *.py
