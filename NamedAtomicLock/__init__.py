@@ -8,11 +8,13 @@
     NamedAtomicLock - A Named atomic lock local to the machine
 
 '''
+# vim: set ts=4 sw=4 expandtab :
+
+
 import os
 import tempfile
 import time
 
-# vim: set ts=4 sw=4 expandtab :
 
 __all__ = ('NamedAtomicLock',)
 
@@ -35,10 +37,13 @@ class NamedAtomicLock(object):
                 This uses a named directory, which is defined by POSIX as an atomic operation.
 
             @param name <str> - The lock name, Cannot contain directory seperator (like '/')
+
             @param lockDir <None/str> - Directory in which to store locks. Defaults to tempdir
+
             @param maxLockAge <None/float> - Maximum number of seconds lock can be held before it is considered "too old" and fair game to be taken.
                 You should likely define this as a reasonable number, maybe 4x as long as you think the operation will take, so that the lock doesn't get
                 held by a dead process.
+
         '''
         self.name = name
         self.maxLockAge = maxLockAge
@@ -122,7 +127,7 @@ class NamedAtomicLock(object):
         '''
             release - Release the lock.
 
-            @param forceRelease <bool> - If True, will release the lock even if we don't hold it.
+            @param forceRelease <bool> default False - If True, will release the lock even if we don't hold it.
 
             @return - True if lock is released, otherwise False
         '''
@@ -189,3 +194,5 @@ class NamedAtomicLock(object):
 
         return True
 
+
+# vim: set ts=4 sw=4 expandtab :
