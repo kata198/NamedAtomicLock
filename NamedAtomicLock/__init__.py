@@ -66,10 +66,18 @@ class NamedAtomicLock(object):
 
         if not os.access(lockDir, os.W_OK):
             raise ValueError('Cannot write to lock directory: %s' %(lockDir,))
-        self.lockPath = lockDir + os.sep + name
+
+        self.lockPath = self.__getLockPath()
         
         self.held = False
         self.acquiredAt = None
+
+
+    def __getLockPath(self):
+        lockFilename = ".NL__" + self.name
+
+        return self.lockDir + os.sep + lockFilename
+
 
     def acquire(self, timeout=None):
         '''
