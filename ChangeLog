@@ -1,3 +1,8 @@
+1.1.3 - Oct 12 2017
+- Add unit tests
+- Better handle the case where a lock expires and another process acquires the expired lock, where version <= 1.1.2 both would think they held the lock. There is still some hairy-ness on reacquisition in this case, which will be handled in 1.2 (requires a design change)
+
+
 1.1.2 - Oct 5 2017
 - Fix isHeld method throwing exception when maxLockAge=None (the default)
 
