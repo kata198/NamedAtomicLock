@@ -6,8 +6,8 @@
 <table width="100%" cellspacing="0" cellpadding="2" border="0" summary="heading" >
 <tr bgcolor="#7799ee" >
 <td valign="bottom" >&nbsp;<br />
-<font color="#ffffff" face="helvetica, arial" >&nbsp;<br /><big ><big ><strong >NamedAtomicLock</strong></big></big> (version 1.1.1)</font></td><td align="right" valign="bottom" ><font color="#ffffff" face="helvetica, arial" ><a href="NamedAtomicLock.html" >index</a></font></td></tr></table>
-    <p ><tt >Copyright&nbsp;(c)&nbsp;2016&nbsp;Timothy&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved&nbsp;under&nbsp;terms&nbsp;of&nbsp;LGPLv3.<br />
+<font color="#ffffff" face="helvetica, arial" >&nbsp;<br /><big ><big ><strong >NamedAtomicLock</strong></big></big> (version 1.1.3)</font></td><td align="right" valign="bottom" ><font color="#ffffff" face="helvetica, arial" ><a href="NamedAtomicLock.html" >index</a></font></td></tr></table>
+    <p ><tt >Copyright&nbsp;(c)&nbsp;2016,&nbsp;2017&nbsp;Timothy&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved&nbsp;under&nbsp;terms&nbsp;of&nbsp;LGPLv3.<br />
 You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;as&nbsp;LICENSE&nbsp;with&nbsp;the&nbsp;source&nbsp;distribution,&nbsp;or&nbsp;it&nbsp;is&nbsp;always&nbsp;available&nbsp;at<br />
 <a href="http://www.gnu.org/licenses/lgpl-3.0.en.html" >http://www.gnu.org/licenses/lgpl-3.0.en.html</a><br />
 &nbsp;<br />
@@ -48,7 +48,9 @@ See&nbsp;https://github.com/kata198/<a href="#NamedAtomicLock" >NamedAtomicLock<
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;uses&nbsp;a&nbsp;named&nbsp;directory,&nbsp;which&nbsp;is&nbsp;defined&nbsp;by&nbsp;POSIX&nbsp;as&nbsp;an&nbsp;atomic&nbsp;operation.<br />
 &nbsp;<br />
 @param&nbsp;name&nbsp;&lt;str&gt;&nbsp;-&nbsp;The&nbsp;lock&nbsp;name,&nbsp;Cannot&nbsp;contain&nbsp;directory&nbsp;seperator&nbsp;(like&nbsp;'/')<br />
+&nbsp;<br />
 @param&nbsp;lockDir&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Directory&nbsp;in&nbsp;which&nbsp;to&nbsp;store&nbsp;locks.&nbsp;Defaults&nbsp;to&nbsp;tempdir<br />
+&nbsp;<br />
 @param&nbsp;maxLockAge&nbsp;&lt;None/float&gt;&nbsp;-&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;seconds&nbsp;lock&nbsp;can&nbsp;be&nbsp;held&nbsp;before&nbsp;it&nbsp;is&nbsp;considered&nbsp;"too&nbsp;old"&nbsp;and&nbsp;fair&nbsp;game&nbsp;to&nbsp;be&nbsp;taken.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;likely&nbsp;define&nbsp;this&nbsp;as&nbsp;a&nbsp;reasonable&nbsp;number,&nbsp;maybe&nbsp;4x&nbsp;as&nbsp;long&nbsp;as&nbsp;you&nbsp;think&nbsp;the&nbsp;operation&nbsp;will&nbsp;take,&nbsp;so&nbsp;that&nbsp;the&nbsp;lock&nbsp;doesn't&nbsp;get<br />
 &nbsp;&nbsp;&nbsp;&nbsp;held&nbsp;by&nbsp;a&nbsp;dead&nbsp;process.</tt></dd></dl>
@@ -62,7 +64,7 @@ See&nbsp;https://github.com/kata198/<a href="#NamedAtomicLock" >NamedAtomicLock<
 
 <dl ><dt ><a name="NamedAtomicLock-release" ><strong >release</strong></a>(self, forceRelease=False)</dt><dd ><tt >release&nbsp;-&nbsp;Release&nbsp;the&nbsp;lock.<br />
 &nbsp;<br />
-@param&nbsp;forceRelease&nbsp;&lt;bool&gt;&nbsp;-&nbsp;If&nbsp;True,&nbsp;will&nbsp;release&nbsp;the&nbsp;lock&nbsp;even&nbsp;if&nbsp;we&nbsp;don't&nbsp;hold&nbsp;it.<br />
+@param&nbsp;forceRelease&nbsp;&lt;bool&gt;&nbsp;default&nbsp;False&nbsp;-&nbsp;If&nbsp;True,&nbsp;will&nbsp;release&nbsp;the&nbsp;lock&nbsp;even&nbsp;if&nbsp;we&nbsp;don't&nbsp;hold&nbsp;it.<br />
 &nbsp;<br />
 @return&nbsp;-&nbsp;True&nbsp;if&nbsp;lock&nbsp;is&nbsp;released,&nbsp;otherwise&nbsp;False</tt></dd></dl>
 
@@ -92,5 +94,5 @@ Data descriptors defined here:<br />
     
 <tr ><td bgcolor="#55aa55" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
 <td width="100%" ><strong >__all__</strong> = ('NamedAtomicLock',)<br />
-<strong >__version_tuple__</strong> = (1, 1, 1)</td></tr></table>
+<strong >__version_tuple__</strong> = (1, 1, 3)</td></tr></table>
 </p></p></p></body></html>
