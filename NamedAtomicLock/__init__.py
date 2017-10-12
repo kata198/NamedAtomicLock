@@ -80,13 +80,15 @@ class NamedAtomicLock(object):
 
             @return  <bool> - True if you got the lock, otherwise False.
         '''
-        # If we aren't going to poll at least 5 times, give us a smaller interval
         if self.held is True:
+            # NOTE: Without some type of in-directory marker (like a uuid) we cannot
+            #        refresh an expired lock accurately
             if os.path.exists(self.lockPath):
                 return True
             # Someone removed our lock
             self.held = False
 
+        # If we aren't going to poll at least 5 times, give us a smaller interval
         if timeout:
             if timeout / 5.0 < DEFAULT_POLL_TIME:
                 pollTime = timeout / 10.0
@@ -139,13 +141,17 @@ class NamedAtomicLock(object):
         
         if not os.path.exists(self.lockPath):
             self.held = False
+            self.acquiredAt = None
             return True
 
         if forceRelease is False:
             # We waited too long and lost the lock
             if self.maxLockAge and time.time() > self.acquiredAt + self.maxLockAge:
                 self.held = False
+                self.acquiredAt = None
                 return False
+
+        self.acquiredAt = None
 
         try:
             os.rmdir(self.lockPath)
@@ -154,6 +160,29 @@ class NamedAtomicLock(object):
         except:
             self.held = False
             return False
+
+
+    def checkExpiration(self, mtime=None):
+        '''
+            checkExpiration - Check if we have expired
+            
+            @param mtime <int> - Optional mtime if known, otherwise will be gathered
+
+            @return <bool> - True if we did expire, otherwise False
+        '''
+        if not self.maxLockAge:
+            return False
+
+        if mtime is None:
+            try:
+                mtime = os.stat(self.lockPath).st_mtime
+            except FileNotFoundError as e:
+                return False
+
+        if mtime < time.time() - self.maxLockAge:
+            return True
+
+        return False
 
     @property
     def isHeld(self):
@@ -170,8 +199,7 @@ class NamedAtomicLock(object):
         except FileNotFoundError as e:
             return False
         
-        if self.maxLockAge and ( mtime < time.time() - self.maxLockAge ):
-            # Expired
+        if self.checkExpiration(mtime):
             return False
 
         return True
@@ -187,10 +215,18 @@ class NamedAtomicLock(object):
         if self.held is False:
             return False
         
-        # Otherwise if we think we hold it, and it is held, it must be held.
+        # Otherwise if we think we hold it, but it is not held, we have lost it.
         if not self.isHeld:
+            self.acquiredAt = None
             self.held = False
             return False
+
+        # Check if we expired
+        if self.checkExpiration(self.acquiredAt):
+            self.acquiredAt = None
+            self.held = False
+            return False
+
 
         return True
 
