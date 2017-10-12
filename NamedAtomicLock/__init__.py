@@ -18,9 +18,9 @@ import time
 
 __all__ = ('NamedAtomicLock',)
 
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
-__version_tuple__ = (1, 1, 2)
+__version_tuple__ = (1, 1, 3)
 
 DEFAULT_POLL_TIME = .1
 
