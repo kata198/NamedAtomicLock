@@ -162,9 +162,9 @@ class NamedAtomicLock(object):
             return False
 
 
-    def checkExpiration(self, mtime=None):
+    def __checkExpiration(self, mtime=None):
         '''
-            checkExpiration - Check if we have expired
+            __checkExpiration - Check if we have expired
             
             @param mtime <int> - Optional mtime if known, otherwise will be gathered
 
@@ -199,7 +199,7 @@ class NamedAtomicLock(object):
         except FileNotFoundError as e:
             return False
         
-        if self.checkExpiration(mtime):
+        if self.__checkExpiration(mtime):
             return False
 
         return True
@@ -222,7 +222,7 @@ class NamedAtomicLock(object):
             return False
 
         # Check if we expired
-        if self.checkExpiration(self.acquiredAt):
+        if self.__checkExpiration(self.acquiredAt):
             self.acquiredAt = None
             self.held = False
             return False
