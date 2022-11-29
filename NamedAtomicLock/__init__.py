@@ -18,9 +18,9 @@ import time
 
 __all__ = ('NamedAtomicLock',)
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
-__version_tuple__ = (1, 1, 3)
+__version_tuple__ = (1, 1, 4)
 
 DEFAULT_POLL_TIME = .1
 
@@ -31,7 +31,7 @@ except:
 
 class NamedAtomicLock(object):
 
-    def __init__(self, name, lockDir=None, maxLockAge=None):
+    def __init__(self, name, lockDir=None, maxLockAge=None, mode=0o770):
         '''
             NamedAtomicLock - Create a NamedAtomicLock.
                 This uses a named directory, which is defined by POSIX as an atomic operation.
@@ -44,9 +44,13 @@ class NamedAtomicLock(object):
                 You should likely define this as a reasonable number, maybe 4x as long as you think the operation will take, so that the lock doesn't get
                 held by a dead process.
 
+            @param mode <integer> - The permissions mode value set for the created lock directory by the acquire function. It is a security best practice 
+                to not create world writable objects. The default value of 0o770 is backwards compatibility.
+
         '''
         self.name = name
         self.maxLockAge = maxLockAge
+        self.mode = mode
 
         if os.sep in name:
             raise ValueError('Name cannot contain "%s"' %(os.sep,))
@@ -106,7 +110,7 @@ class NamedAtomicLock(object):
         success = False
         while keepGoing():
             try:
-                os.mkdir(self.lockPath) 
+                os.mkdir(self.lockPath, self.mode) 
                 success = True
                 break
             except:
